@@ -46,7 +46,7 @@ class LinkedList {
   }
 
   insert = (index, value) => {
-    if (index >= this.lenght - 1) {
+    if (index >= this.length - 1) {
       return this.append(value);
     }
 

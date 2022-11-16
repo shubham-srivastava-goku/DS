@@ -6,7 +6,7 @@ class Node {
   }
 }
 
-class DublyLinkedList {
+class DoublyLinkedList {
   constructor(value) {
     this.head = new Node(value);
     this.tail = this.head;
@@ -17,7 +17,7 @@ class DublyLinkedList {
     const newNode = new Node(value);
 
     this.tail.next = newNode;
-    this.tail.prev = this.tail;
+    newNode.prev = this.tail;
     this.tail = newNode;
     this.length += 1;
 
@@ -47,7 +47,7 @@ class DublyLinkedList {
   }
 
   insert = (index, value) => {
-    if (index >= this.lenght - 1) {
+    if (index >= this.length - 1) {
       return this.append(value);
     }
 
@@ -93,13 +93,26 @@ class DublyLinkedList {
 
     array.push(currentNode.value);
     return array;
-  };
+  }
+
+  reverse = () => {
+    const array = [];
+    let currentNode = this.tail;
+    while(currentNode.prev) {
+      array.push(currentNode.value);
+      currentNode = currentNode.prev;
+    }
+
+    array.push(currentNode.value);
+    return array;
+  }
 }
 
-const linkedList = new DublyLinkedList(15);
+const linkedList = new DoublyLinkedList(15);
 linkedList.append(20);
 linkedList.append(30);
 linkedList.prepend(5);
 linkedList.insert(1, 10);
 linkedList.remove(2);
 console.log(linkedList.print());
+console.log(linkedList.reverse());
