@@ -39,7 +39,47 @@ class BinaryTree {
   }
 
   lookup = (value) => {
-    
+    if (!this.root) {
+      return null;
+    }
+    let current = this.root;
+    while(current) {
+      if (value < current.value) {
+        current = current.left;
+      } else if (value > current.value) {
+        current = current.right;
+      } else if (value === current.value) {
+        return current;
+      }
+    }
+    return null;
+  }
+
+  remove = (value) => {
+    if (!this.root) {
+      return null;
+    }
+    let current = this.root;
+    let parentNode = null;
+    while(current) {
+      parentNode = current;
+      if (value < current.value) {
+        current = current.left;
+      } else if (value > current.value) {
+        current = current.right;
+      } else if (value === current.value) {
+        // No right child
+
+        if (current.right === null) {
+          if (current.left !== null) {
+            parentNode.left = current.left;
+          } else {
+            parentNode.left = null;
+          }
+        }
+      }
+    }
+    return null;
   }
 }
 
@@ -52,5 +92,7 @@ bst.insert(170);
 bst.insert(1);
 bst.insert(6);
 bst.insert(15);
-
 console.log(JSON.stringify(bst));
+
+console.log(bst.lookup(6));
+console.log(bst.lookup(213));
